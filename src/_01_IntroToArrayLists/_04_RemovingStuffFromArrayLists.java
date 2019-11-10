@@ -35,12 +35,12 @@ public class _04_RemovingStuffFromArrayLists {
 		System.out.println(stuffIFoundInTheYard.size());
 
 		/* TODO 1: Clean out the dirt but keep the delicious worms. */
+
 		for(int i = 0; i<stuffIFoundInTheYard.size(); i++) {
 			if(stuffIFoundInTheYard.get(i).type.equalsIgnoreCase("dirt")) {
 				stuffIFoundInTheYard.remove(i);
 			}
 		}
-		//stuffIFoundInTheYard.removeIf(Dirt)
 		
 		System.out.println(stuffIFoundInTheYard.size()); // should be 2
 
@@ -89,3 +89,4 @@ for(int i=0; i<truth.size(); i++) {
 		
 	}
 }
+

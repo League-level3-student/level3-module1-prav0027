@@ -16,6 +16,13 @@ public class _05_LongChipCompetition {
 
 	public static void main(String[] args) {
 		_05_LongChipCompetition lcc = new _05_LongChipCompetition();
+		lcc.initializeBeatles();
+		double highest = 0;
+		String name = "";
+		for(int i=0; i<lcc.getTheBand().size(); i++) {
+			//***HELP*** call stuff from another Class!!!!//
+		
+		}
 		
 	}
 	
