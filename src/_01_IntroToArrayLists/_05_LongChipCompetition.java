@@ -20,9 +20,13 @@ public class _05_LongChipCompetition {
 		double highest = 0;
 		String name = "";
 		for(int i=0; i<lcc.getTheBand().size(); i++) {
-			//***HELP*** call stuff from another Class!!!!//
-		
+		for(int a=0; a<lcc.getTheBand().get(i).getChips().size(); a++) {
+			if(lcc.getTheBand().get(i).getChips().get(a).getLength()>highest) {
+				highest = lcc.getTheBand().get(i).getChips().get(a).getLength();
+			}
 		}
+		}
+		System.out.println(highest);
 		
 	}
 	
