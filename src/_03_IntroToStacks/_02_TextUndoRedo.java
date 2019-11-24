@@ -20,22 +20,32 @@ public class _02_TextUndoRedo implements KeyListener{
 	 * off the Stack and added back to the JLabel.
 	 * 
 	 * */
-	
+	//static JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
+	String typed = " ";
+	JFrame frame = new JFrame();
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		JPanel panel = new JPanel();
-		JLabel label = new JLabel();
-		panel.add(label);
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setup();
 	}
 
+	public void setup() {
+	label.setText("You typed: " + typed);
+	panel.add(label);
+	frame.add(panel);
+	frame.setTitle("Type Something");
+	frame.addKeyListener(this);
+	frame.pack();
+	frame.setVisible(true);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+}
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("typed something");
+		typed = label.getText()+e.getKeyChar();
+		label.setText(typed);
+		System.out.println(label.getText());
 	}
 
 	@Override
