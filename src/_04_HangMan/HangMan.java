@@ -20,60 +20,66 @@ public class HangMan implements KeyListener{
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JTextField input = new JTextField();
-	JLabel characternumber = new JLabel();
-	JLabel lettersused = new JLabel();
-	JLabel lives = new JLabel();
+	JLabel characterlabel = new JLabel();
+	JLabel charsusedlabel = new JLabel();
+	JLabel liveslabel = new JLabel();
 	char guess;
+	char[] letters;
+	String[] dashs;
+	int numberentered;
+	int lives;
+	String dashstring;
+	String charsused;
+	String livesstring;
+	boolean isLetter;
+	
 	
 	
 	void setup() {
-	String enterednumber = JOptionPane.showInputDialog("Please enter a number.");
-	int number = Integer.parseInt(enterednumber);
+	numberentered = Integer.parseInt(JOptionPane.showInputDialog("Please enter a number."));
 	
 	
 	Stack<String> words = new Stack<String>();
-	for(int i=0; i<number; i++) {
+	for(int i=0; i<numberentered; i++) {
 		words.push(Utilities.readRandomLineFromFile("dictionary.txt"));
 	}
 	String firstword = words.pop();
-	int charnumber = firstword.length();
-	System.out.println("Char: "+charnumber);
+	letters = firstword.toCharArray();
+	dashs = new String[letters.length];
+	System.out.println("Char: "+letters.length);
 	System.out.println("First word: "+firstword);
 	
+	lives = 10;
+	livesstring = "Number of lives: "+lives;
+
 	
 	
+	dashstring = " ";
+	charsused = "Letters guessed: ";
 	
-	
-	
-	//JFrame frame = new JFrame();
-	//JPanel panel = new JPanel();
-	//JTextField input = new JTextField();
-	//JLabel characternumber = new JLabel();
-	//JLabel lettersused = new JLabel();
-	//JLabel lives = new JLabel();
-	String dashnumber = " ";
-	String charused = " ";
-	
-	
-	for(int i=0; i<charnumber; i++) {
-		dashnumber = dashnumber.concat("_ ");
+	for(int a = 0; a<letters.length; a++) {
+		dashs[a]="_ ";
+		dashstring = dashstring.concat(dashs[a]);
 	}
 	
-	
-	characternumber.setText(dashnumber);
+
+	characterlabel.setText(dashstring);
 	input.addKeyListener(this);
 	
 	
 	
 	frame.add(panel);
 	panel.add(input);
-	panel.add(lettersused);
-	panel.add(characternumber);
+	panel.add(characterlabel);
+	panel.add(charsusedlabel);
+	panel.add(liveslabel);
+	liveslabel.setText(livesstring);
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.pack();
-	System.out.println(dashnumber);
-	
+	System.out.println("------");
+	for(int c = 0; c<dashs.length; c++) {
+	}
 	
 	}
 
@@ -89,8 +95,27 @@ public class HangMan implements KeyListener{
 		frame.pack();
 		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 			guess = input.getText().charAt(0);
-			System.out.println(guess);
+			charsused = charsused.concat(guess+", ");
+			charsusedlabel.setText(charsused);
+			for(int i=0; i<letters.length; i++) {
+				if(letters[i]==guess) {
+					dashs[i]=guess+" ";
+					System.out.println(" ");
+					dashstring = dashs[0];
+					for(int a = 1; a<letters.length; a++) {
+						dashstring = dashstring.concat(dashs[a]);
+					}
+					characterlabel.setText(dashstring);
+					isLetter = true;
+				}
+			}
+			if(isLetter==false) {
+			lives--;
+			livesstring = "Number of lives: "+lives;
+			liveslabel.setText(livesstring);
+			}
 		}
+		frame.pack();
 	}
 
 	@Override
