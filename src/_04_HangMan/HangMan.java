@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 public class HangMan implements KeyListener{
 	public static void main(String[] args) {
 		HangMan hangman = new HangMan();
-		hangman.setup();		
+		hangman.setup();
 	}
 	
 	
@@ -32,6 +32,7 @@ public class HangMan implements KeyListener{
 	String charsused;
 	String livesstring;
 	boolean isLetter;
+	String wannaplayagain;
 	
 	
 	
@@ -81,7 +82,55 @@ public class HangMan implements KeyListener{
 	for(int c = 0; c<dashs.length; c++) {
 	}
 	
+	if(lives==0) {
+		wannaplayagain = JOptionPane.showInputDialog("You have run out of lives. Game over! Would you like to play again?");
 	}
+	
+	if(wannaplayagain.equalsIgnoreCase("yes")) {
+		String nextword = words.pop();
+		letters = nextword.toCharArray();
+		dashs = new String[letters.length];
+		System.out.println("Char: "+letters.length);
+		System.out.println("First word: "+nextword);
+		
+		lives = 10;
+		livesstring = "Number of lives: "+lives;
+
+		
+		
+		dashstring = " ";
+		charsused = "Letters guessed: ";
+		
+		for(int a = 0; a<letters.length; a++) {
+			dashs[a]="_ ";
+			dashstring = dashstring.concat(dashs[a]);
+		}
+		
+
+		characterlabel.setText(dashstring);
+		input.addKeyListener(this);
+		
+		
+		
+		frame.add(panel);
+		panel.add(input);
+		panel.add(characterlabel);
+		panel.add(charsusedlabel);
+		panel.add(liveslabel);
+		liveslabel.setText(livesstring);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		System.out.println("------");
+	
+	}
+	
+	else if(wannaplayagain.equalsIgnoreCase("no")) {
+		System.exit(0);
+	}
+	
+	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -97,6 +146,7 @@ public class HangMan implements KeyListener{
 			guess = input.getText().charAt(0);
 			charsused = charsused.concat(guess+", ");
 			charsusedlabel.setText(charsused);
+			isLetter = false;
 			for(int i=0; i<letters.length; i++) {
 				if(letters[i]==guess) {
 					dashs[i]=guess+" ";
@@ -116,6 +166,7 @@ public class HangMan implements KeyListener{
 			}
 		}
 		frame.pack();
+	
 	}
 
 	@Override
