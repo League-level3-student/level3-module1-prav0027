@@ -28,5 +28,10 @@ public class _00_HashMapDemo {
 		}
 		
 		System.out.println(Math.sqrt(3));
+		
+		System.out.println(" ");
+		for(Integer i : studentRoster.keySet()){
+			System.out.println("ID: "+i+", Name: "+studentRoster.get(i));
+		}
 	}
 }
